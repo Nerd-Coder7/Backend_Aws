@@ -17,6 +17,8 @@ app.use(morgan("dev"))
 app.use(cors());
 const connection = require("./connection/connection")
 
+app.use(express.static('public'));
+app.use('/images', express.static('images'));
 app.use("/api", home , aboutAs,services,services_detail2,resources,case_studies,industrial_page,case_studiesDetail);
 
 
