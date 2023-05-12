@@ -11,6 +11,7 @@ const services_detail2= require("./router/services_detail2")
 const resources = require("./router/resources")
 const industrial_page =require("./router/industrial_page")
 const case_studies= require("./router/case_studies")
+const Blogs= require("./router/blogs")
 const case_studiesDetail = require("./router/case_studiesDetail")
 app.use(express.json());
 app.use(morgan("dev"))
@@ -19,7 +20,7 @@ const connection = require("./connection/connection")
 
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
-app.use("/api", home , aboutAs,services,services_detail2,resources,case_studies,industrial_page,case_studiesDetail);
+app.use("/api", home , aboutAs,services,services_detail2,resources,case_studies,industrial_page,case_studiesDetail,Blogs);
 
 
 app.listen(Port, () => {
