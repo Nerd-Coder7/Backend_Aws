@@ -22,6 +22,9 @@ app.use(express.static('public'));
 app.use('/images', express.static('images'));
 app.use("/api", home , aboutAs,services,services_detail2,resources,case_studies,industrial_page,case_studiesDetail,Blogs);
 
+app.get("/",(req,res)=>{
+   res.status(200).json("AWS SHIVAM:-/api"+"\n"+"/gethomepage"+"\n"+"/getService"+"\n"+"/get_services_detail2"+"\n"+"/get_resources"+"\n"+"/get_industries"+"\n"+"/get_case_studiesDetail"+"\n"+"/get_case_studies"+"\n"+"/get_aboutas")
+})
 
 app.listen(Port, () => {
     connection()
