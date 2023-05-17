@@ -49,11 +49,22 @@ module.exports = {
     async update(req,res){
         try {
             const { id, key, updatekey, new_value } = req.body
-            const data = await model.findOneAndUpdate({ _id: id }, {
+            console.log("46546465",req.body)
+            let data
+            if(!updatekey){
+                 data = await model.findOneAndUpdate({ _id: id }, {
+                    $set: {
+                        [`${key}`]: new_value
+                    },
+                }, { new: true }) 
+            }
+            else{
+             data = await model.findOneAndUpdate({ _id: id }, {
                 $set: {
                     [`${key}.0.${updatekey}`]: new_value
                 },
             }, { new: true })
+        }
             console.log(data)
             if (!data) {
                 console.log(data)
@@ -65,5 +76,23 @@ module.exports = {
             console.log(e)
             return res.status(500).send(e)
         }
+        // try {
+        //     const { id, key, updatekey, new_value } = req.body
+        //     const data = await model.findOneAndUpdate({ _id: id }, {
+        //         $set: {
+        //             [`${key}.0.${updatekey}`]: new_value
+        //         },
+        //     }, { new: true })
+        //     console.log(data)
+        //     if (!data) {
+        //         console.log(data)
+        //         return res.status(400).send("something went wrong")
+        //     } else {
+        //         return res.status(200).send({ message: "data update successfully", data: data })
+        //     }
+        // } catch (e) {
+        //     console.log(e)
+        //     return res.status(500).send(e)
+        // }
     }
 }

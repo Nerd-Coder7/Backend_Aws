@@ -51,11 +51,21 @@ module.exports = {
     async update_homepage(req, res) {
         try {
             const { id, key, updatekey, new_value } = req.body
-            const data = await model.findOneAndUpdate({ _id: id }, {
+            let data
+            if(!updatekey){
+                 data = await model.findOneAndUpdate({ _id: id }, {
+                    $set: {
+                        [`${key}`]: new_value
+                    },
+                }, { new: true }) 
+            }
+            else{
+             data = await model.findOneAndUpdate({ _id: id }, {
                 $set: {
                     [`${key}.0.${updatekey}`]: new_value
                 },
             }, { new: true })
+        }
             console.log(data)
             if (!data) {
                 console.log(data)
